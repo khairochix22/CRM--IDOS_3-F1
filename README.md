@@ -91,15 +91,21 @@ php artisan key:generate
 # 6. Run migrations and seed default data
 php artisan migrate --seed
 
-# 7. Build frontend assets
-npm run build
-
-# 8. (Optional) Create storage symlink
+# 7. (Optional) Create storage symlink + demo data
 php artisan storage:link
+php artisan db:seed --class=DemoSeeder
 
-# 9. Serve
-php artisan serve
+# 8. Start everything with ONE command
+npm run dev
 ```
+
+`npm run dev` (see `scripts/dev.mjs`) does all of this for you:
+
+- picks a PHP **8.4+** binary automatically (`PHP_BINARY` env var → newest Laragon PHP → `php` on PATH)
+- checks MySQL from your `.env`, and starts Laragon's MySQL if it is not running
+- starts `php artisan serve` (http://127.0.0.1:8000), the queue worker, and Vite (React hot reload) in one terminal
+
+Press **Ctrl+C** to stop. Use `npm run dev:vite` if you only want Vite, or `npm run build` for production assets.
 
 **Default admin login:** `admin@minicrm.test` / `password`
 
@@ -108,20 +114,23 @@ php artisan serve
 ## Docker Quick-Start
 
 ```bash
-# Copy env
+# Copy env (and generate a key once: php artisan key:generate)
 cp .env.example .env
 
 # Start all services (app, nginx, mysql, redis)
-docker-compose up -d
+docker compose up -d --build
 
 # Run migrations and seed
-docker-compose exec app php artisan migrate --seed
+docker compose exec app php artisan migrate --seed
+docker compose exec app php artisan storage:link
 
 # Build frontend
-docker-compose exec app npm run build
+docker compose exec app npm run build
 ```
 
-Access the app at `http://localhost:8080`
+Access the app at `http://localhost:8080`. Docker MySQL is exposed on host port **3308** and Redis on **6380**, so they never clash with Laragon (3306) or `npm run dev` (8000).
+
+> If `docker compose up --build` fails with `failed to execute bake`, build the image directly and then start: `docker build -t geniouscrm-main-app .` then `docker compose up -d --no-build`.
 
 ---
 

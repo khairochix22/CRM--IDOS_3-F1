@@ -60,19 +60,17 @@ This creates the default roles, permissions, and the admin account:
 |-------|----------|------|
 | `admin@minicrm.test` | `password` | Admin |
 
-**6. Build the frontend**
+**6. Start everything with one command**
 
 ```bash
-npm run build
+npm run dev
 ```
 
-**7. Start the server**
+This starts the Laravel server, the queue worker (notifications/emails) and the Vite dev server together. It also picks a PHP 8.4+ binary automatically and starts Laragon's MySQL if it isn't running. Press **Ctrl+C** to stop.
 
-```bash
-php artisan serve
-```
+Open **http://127.0.0.1:8000** and log in with `admin@minicrm.test` / `password`.
 
-Open **http://localhost:8000** and log in with `admin@minicrm.test` / `password`.
+For production, build the assets with `npm run build` and serve with your web server.
 
 ---
 

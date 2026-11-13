@@ -613,3 +613,17 @@ Each page or reusable component file starts with a JSDoc block:
 - [x] Sidebar link "Web Forms" (admin, manager); `/leads?form={id}` filter
 - [x] Activity label `form_submitted`; API `LeadResource` handles null `created_by`
 - [x] Feature test: `tests/Feature/LeadFormTest.php` (7 tests)
+
+---
+
+## Phase 21: UI Refresh & One-Command Dev ✅
+- [x] `npm run dev` → `scripts/dev.mjs`: auto-picks PHP 8.4+, starts Laragon MySQL if down, runs server + queue + Vite together
+- [x] `lucide-react` icons across layout and main pages
+- [x] Indigo brand design tokens (light + dark) in `resources/css/app.css`
+- [x] Sidebar: grouped sections, brand mark, user card, mobile slide-in drawer (auto-closes on navigate)
+- [x] Shared UI components in `Modules/Core/resources/js/Components/UI/`: `PageHeader`, `EmptyState`, `AuthLayout`, `IconInput`
+- [x] Illustrations in `public/images/` (`auth-hero.svg`, `welcome.svg`, `empty-state.svg`)
+- [x] Split-screen auth pages (Login, Register, Forgot/Reset password, 2FA) with demo-account quick fill on localhost
+- [x] Dashboard: welcome banner, KPI cards, pipeline-by-stage, my upcoming tasks, recent activity
+- [x] Responsive: all tables scroll horizontally on mobile; header search shrinks; stacked page headers
+- [x] Docker: added `Dockerfile`, `docker/nginx/default.conf`, `.dockerignore`; host ports 8080 / 3308 / 6380

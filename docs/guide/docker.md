@@ -13,14 +13,14 @@ cp .env.example .env
 Start all services:
 
 ```bash
-docker compose up -d
+docker compose up -d --build
 ```
 
 This starts:
 - **app** — PHP-FPM container
-- **nginx** — web server on port 80
-- **mysql** — MySQL 8 on port 3306
-- **redis** — Redis on port 6379
+- **nginx** — web server on host port 8080
+- **mysql** — MySQL 8 on host port 3308
+- **redis** — Redis on host port 6380
 
 Run first-time setup inside the container:
 
@@ -28,11 +28,11 @@ Run first-time setup inside the container:
 docker compose exec app composer install
 docker compose exec app php artisan key:generate
 docker compose exec app php artisan migrate --seed
-docker compose exec app npm ci && npm run build
+docker compose exec app npm run build
 docker compose exec app php artisan storage:link
 ```
 
-Open [http://localhost](http://localhost).
+Open [http://localhost:8080](http://localhost:8080). (Ports are chosen so Docker can run alongside Laragon and `npm run dev`.)
 
 ---
 
