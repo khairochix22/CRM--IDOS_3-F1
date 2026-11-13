@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" fill="none" role="img" aria-label="Nothing here yet">
+  <!-- Mini CRM empty-state illustration · Xgenious · MIT -->
+  <ellipse cx="100" cy="124" rx="70" ry="8" fill="#6366f1" opacity=".08"/>
+  <!-- back card -->
+  <rect x="58" y="20" width="96" height="70" rx="10" fill="#e0e7ff" transform="rotate(8 106 55)"/>
+  <!-- front card -->
+  <rect x="46" y="26" width="100" height="74" rx="10" fill="#fff" stroke="#c7d2fe" stroke-width="2"/>
+  <circle cx="66" cy="46" r="8" fill="#c7d2fe"/>
+  <rect x="80" y="41" width="50" height="6" rx="3" fill="#e0e7ff"/>
+  <rect x="80" y="51" width="34" height="5" rx="2.5" fill="#eef2ff"/>
+  <rect x="58" y="66" width="76" height="6" rx="3" fill="#eef2ff"/>
+  <rect x="58" y="78" width="56" height="6" rx="3" fill="#eef2ff"/>
+  <!-- magnifier -->
+  <circle cx="138" cy="92" r="16" fill="#fff" stroke="#6366f1" stroke-width="4"/>
+  <circle cx="138" cy="92" r="8" fill="#eef2ff"/>
+  <path d="M150 104l12 12" stroke="#6366f1" stroke-width="6" stroke-linecap="round"/>
+  <!-- sparkles -->
+  <path d="M34 30l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z" fill="#a5b4fc"/>
+  <path d="M168 26l2 4.5 4.5 2-4.5 2-2 4.5-2-4.5-4.5-2 4.5-2z" fill="#fbbf24"/>
+</svg>

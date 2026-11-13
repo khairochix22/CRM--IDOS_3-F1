@@ -1,0 +1,84 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@source '../**/*.jsx';
+@source '../../Modules/**/resources/js/**/*.jsx';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Design tokens — indigo brand on a soft neutral base (light mode defaults) */
+    --color-background: oklch(0.984 0.003 264);
+    --color-foreground: oklch(0.21 0.02 265);
+    --color-card: oklch(1 0 0);
+    --color-card-foreground: oklch(0.21 0.02 265);
+    --color-border: oklch(0.925 0.008 264);
+    --color-input: oklch(0.925 0.008 264);
+    --color-primary: oklch(0.511 0.262 276.97);          /* indigo-600 */
+    --color-primary-foreground: oklch(0.99 0 0);
+    --color-secondary: oklch(0.962 0.018 272.3);          /* indigo-50 */
+    --color-secondary-foreground: oklch(0.457 0.24 277);
+    --color-muted: oklch(0.967 0.004 264);
+    --color-muted-foreground: oklch(0.52 0.02 264);
+    --color-accent: oklch(0.962 0.018 272.3);
+    --color-accent-foreground: oklch(0.457 0.24 277);
+    --color-destructive: oklch(0.577 0.245 27.325);
+    --color-ring: oklch(0.673 0.182 276.9);
+    --color-sidebar: oklch(1 0 0);
+    --color-sidebar-foreground: oklch(0.37 0.02 265);
+    --color-sidebar-accent: oklch(0.962 0.018 272.3);
+    --color-sidebar-border: oklch(0.925 0.008 264);
+
+    --radius: 0.625rem;
+
+    --animate-fade-in: fade-in 0.25s ease-out;
+    --animate-slide-in: slide-in 0.25s ease-out;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(0); }
+}
+
+/* ── Dark Mode — toggled by adding `dark` class to <html> ── */
+@layer base {
+    html.dark {
+        --color-background: oklch(0.16 0.015 268);
+        --color-foreground: oklch(0.97 0.005 264);
+        --color-card: oklch(0.205 0.02 268);
+        --color-card-foreground: oklch(0.97 0.005 264);
+        --color-border: oklch(0.29 0.02 268);
+        --color-input: oklch(0.29 0.02 268);
+        --color-primary: oklch(0.673 0.182 276.9);         /* indigo-400 */
+        --color-primary-foreground: oklch(0.16 0.015 268);
+        --color-secondary: oklch(0.27 0.06 277);
+        --color-secondary-foreground: oklch(0.87 0.065 274);
+        --color-muted: oklch(0.25 0.02 268);
+        --color-muted-foreground: oklch(0.71 0.02 264);
+        --color-accent: oklch(0.27 0.06 277);
+        --color-accent-foreground: oklch(0.87 0.065 274);
+        --color-destructive: oklch(0.704 0.191 22.216);
+        --color-ring: oklch(0.585 0.233 277.1);
+        --color-sidebar: oklch(0.185 0.018 268);
+        --color-sidebar-foreground: oklch(0.86 0.01 264);
+        --color-sidebar-accent: oklch(0.27 0.04 277);
+        --color-sidebar-border: oklch(0.29 0.02 268);
+    }
+
+    /* Thin, unobtrusive scrollbars */
+    * { scrollbar-width: thin; scrollbar-color: var(--color-border) transparent; }
+
+    /* Make every table horizontally scrollable on small screens instead of
+       squashing or overflowing the page. */
+    main table { min-width: 36rem; }
+    @media (min-width: 768px) { main table { min-width: 0; } }
+}
