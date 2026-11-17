@@ -627,3 +627,17 @@ Each page or reusable component file starts with a JSDoc block:
 - [x] Dashboard: welcome banner, KPI cards, pipeline-by-stage, my upcoming tasks, recent activity
 - [x] Responsive: all tables scroll horizontally on mobile; header search shrinks; stacked page headers
 - [x] Docker: added `Dockerfile`, `docker/nginx/default.conf`, `.dockerignore`; host ports 8080 / 3308 / 6380
+
+---
+
+## Phase 22: Production Deployment (AWS) ✅
+> Guide: `docs/deployment/aws.md`
+- [x] `Dockerfile` multi-stage: `dev`, `production` (no dev deps, OPcache, assets built in image), `web` (nginx)
+- [x] `docker-compose.prod.yml`: caddy (HTTPS), web, app, worker, scheduler, mysql (healthcheck), redis — only ports 80/443 published
+- [x] `docker/caddy/Caddyfile`: automatic Let's Encrypt certificate for `APP_DOMAIN`
+- [x] `docker/nginx/prod.conf`: HTTP-only upstream behind Caddy (no self-signed cert files needed)
+- [x] `.env.production.example` template (no secrets committed); `.env` mounted read-only into app containers
+- [x] `bootstrap/app.php`: `trustProxies` so HTTPS/client IP/secure cookies work behind the proxy
+- [x] `routes/web.php`: root route is a redirect instead of a closure so `route:cache` works
+- [x] `.dockerignore` excludes all `.env.*` files except the templates
+- [x] Deployment guide: EC2 setup, DNS, env, migrate/seed, SES email, backups, redeploy, troubleshooting

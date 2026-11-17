@@ -1,0 +1,23 @@
+# Mini CRM — Caddy reverse proxy (production)
+#
+# Caddy obtains and renews a free Let's Encrypt certificate automatically.
+# Requirements: the domain in APP_DOMAIN must point (A record) to the server's public IP,
+# and ports 80 and 443 must be open.
+#
+# Author  : Xgenious (https://xgenious.com)
+# License : MIT
+
+{$APP_DOMAIN} {
+	encode zstd gzip
+
+	# Forward everything to the nginx container; Caddy adds X-Forwarded-Proto/For.
+	reverse_proxy web:80
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+}

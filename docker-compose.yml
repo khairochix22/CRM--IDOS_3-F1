@@ -15,6 +15,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: dev
     container_name: mini_crm_app
     restart: unless-stopped
     volumes:

@@ -12,6 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Behind a reverse proxy (Caddy on AWS, or a load balancer), trust the
+        // X-Forwarded-* headers so HTTPS detection, client IPs and secure cookies work.
+        $middleware->trustProxies(at: env('TRUSTED_PROXIES', '*'));
+
         // Inertia: handle session flash on redirects
         $middleware->web(append: [
             \App\Http\Middleware\HandleInertiaRequests::class,
