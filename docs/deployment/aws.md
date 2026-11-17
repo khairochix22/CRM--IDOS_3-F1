@@ -21,7 +21,7 @@ Only ports **80** and **443** are open to the internet. MySQL and Redis are not 
 ## 0. What you need before starting
 
 - An AWS account.
-- A **domain name** you control (for example `crm.example.com`). HTTPS requires a domain.
+- A **domain name** is **optional**. Without one, the site runs on the server's IP over plain HTTP (test or internal use only). For HTTPS with a real certificate you need a domain or a free hostname such as `crm.<IP>.nip.io`.
 - The project in a **git repository** you own (GitHub/GitLab/Bitbucket, private recommended).
 - Optional: an email sender for production mail (Amazon SES, see step 9).
 
@@ -107,7 +107,9 @@ docker compose version
 
 ---
 
-## 4. Point your domain to the server
+## 4. Point your domain to the server (skip if using IP only)
+
+If you use **IP only** (no domain), skip this step and go to step 5.
 
 At your DNS provider (or **Route 53**), create an **A record**:
 
@@ -143,7 +145,15 @@ cp .env.production.example .env
 nano .env
 ```
 
-Replace every `CHANGE_ME` value and set your domain. Generate strong passwords with:
+**IP-only setup (no domain):** set these values, replacing the IP with your Elastic IP:
+
+```
+APP_URL=http://13.250.10.20
+APP_DOMAIN=:80
+SESSION_SECURE_COOKIE=false
+```
+
+Replace every other `CHANGE_ME` value too. Generate strong passwords with:
 
 ```bash
 openssl rand -base64 24
@@ -219,7 +229,7 @@ docker compose -f docker-compose.prod.yml exec app ls -l public/storage
 
 ## 9. Open the site and set up email
 
-Open **https://crm.example.com**. The first request can take a few seconds while Caddy requests the certificate. If the browser shows a certificate error, wait a minute and reload.
+Open **http://<ELASTIC_IP>** (IP-only setup). With a domain, open **https://crm.example.com** instead; the first request can take a few seconds while Caddy requests the certificate.
 
 **Email (recommended: Amazon SES)**
 
